@@ -5,141 +5,453 @@ import {
 } from "code-surfer";
 import { github, vsDark } from "@code-surfer/themes";
 
-export const theme = vsDark;
+import "prismjs/components/prism-clike.js"
+import "prismjs/components/prism-java.js"
 
-# Hello 👋
+import java from './resources/java.jpg';
 
-You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](https://codesurfer.pomb.us)
+export const theme = github;
+
+# Java Intermedio 
+
+Presentación: [ggzor-expo-java-dia1.netlify.app](https://ggzor-expo-java-dia1.netlify.app)
+
+<img src={java} />
+
+---
+
+# Conocimientos previos 🧠
+
+- Programación estructurada
+  - Condicionales
+  - Ciclos
+  - Funciones
+  - Estructuras (<span style="color: #00a4db">`struct`</span>)
+  - Arreglos
+- Sintáxis básica de Java
+- Reglas de alcance
+- Entrada y salida por consola
+- Haber instalado JDK >= 8
+- Manejo de un IDE/Editor<br />(**vscode**, Eclipse, NetBeans, etc)
 
 ---
 
 <CodeSurfer>
 
-```js title="This is a title" subtitle="and this a subtitle"
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
+```java title="Sintaxis básica 🥱"
+int x = 8;
+int y = 9;
+String cadenas = new String[] { 
+  "|V| > 6",  
+  "No es un vector lo suficientemente grande" };
 
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
+if (Math.sqrt(x * x + y * y) > 6)
+  System.out.println(cadenas[0]);
+else
+  throw new IllegalArgumentException(cadenas[1]);
 
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
+for (String s : cadenas) {
+  System.out.println(s.toUpperCase());
 }
 ```
 
-```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
+```diff 10 title="Uso de excepciones básico ❗️"
+```
+
+```diff 12:15 title="Ciclos for-each ♾️"
+```
+
+```java title="Declaración de clases simple ⚙️"
+public class Vector2D {
+  private int x;
+  private int y;
+
+  public Vector2D(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
 }
+```
+</CodeSurfer>
 
-function adipiscing(...elit) {
-  if (!elit.sit) {
-    return [];
-  }
+---
 
-  const sed = elit[0];
-  return eiusmod.tempor(sed) ? sed : [sed];
-}
+<CodeSurfer>
 
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
+```java title="Esto debería de ser un poco extraño 🙃"
+List<String> lista = new ArrayList<String>();
+lista.add("Cadena 13");
+lista.add("Cadena 2");
+lista.add("Cadena 15");
 
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
+for (String s : lista) {
+  System.out.println(s);
 }
 ```
 
-```diff 1[10:14],2[15:19],3[22:27],10:12
+```java title="Esto sí debería ser extraño 🤨"
+List<String> lista = new ArrayList<String>();
+lista.add("Cadena 13");
+lista.add("Cadena 2");
+lista.add("Cadena 15");
 
+int x = lista.stream()
+             .map(s -> s.split(" ")[1])
+             .mapToInt(Integer::parseInt)
+             .filter(i -> i > 10)
+             .sum();
+
+System.out.println(x);
+```
+
+```diff 1:20 title="¿Qué imprime este programa? 🤔"
+```
+
+
+</CodeSurfer>
+
+---
+
+# Tema inicial
+
+- **POO Básico**
+  - Abstracción
+  - Encapsulamiento
+  - Polimorfismo
+  - POO en Java / Ejemplo Vector2D
+  - POO en Java / Ejemplo GUI
+
+
+---
+
+# Temas
+
+- **Streams: Principios y operadores básicos**
+  - El patrón del **iterador**
+  - <span style="color: #d73a49">map</span> y <span style="color: #d73a49">filter</span> 
+  - Polimorfismo paramétrico: Genéricos
+  - Funciones lambda
+  - Interfaces
+  - <span style="color: #d73a49">reduce</span> básico
+
+- **Proyecto: Interfaz ASCII**
+  - Polimorfismo de subtipos: Herencia
+  - Clases abstractas
+  - Sobreescritura de métodos <span style="color: #00a4db">`override`</span>
+  - El patrón del **decorador**
+
+---
+
+<CodeSurfer>
+
+```java title="Streams"
+List<String> lista = new ArrayList<String>();
+lista.add("Cadena 13");
+lista.add("Cadena 2");
+lista.add("Cadena 15");
+
+int x = lista.stream()
+             .map(s -> s.split(" ")[1])
+             .mapToInt(Integer::parseInt)
+             .filter(i -> i > 10)
+             .sum();
+
+System.out.println(x); // 28
+```
+
+```diff 7[19:38],9[22:32] title="Funciones lambda (o anónimas)"
 ```
 
 </CodeSurfer>
 
 ---
 
-<CodeSurferColumns themes={[vsDark, github]}>
+import streamsjava from './resources/streamsjava.png'
+
+# Una herramienta ubicua
+## [Java Streams](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html)
+
+<img src={streamsjava} />
+
+---
+
+import "prismjs/components/prism-csharp.js"
+import "prismjs/components/prism-python.js"
+import "prismjs/components/prism-haskell.js"
+
+<CodeSurferColumns themes={[github, github]}>
 
 <Step>
 
-```js
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
+```java title="Java Streams"
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class Main {
+  public static void main(String[] args) {
+    List<String> lista = new ArrayList<String>();
+    lista.add("Cadena 13");
+    lista.add("Cadena 2");
+    lista.add("Cadena 15");
+
+    int x = lista.stream()
+                 .map(s -> s.split(" ")[1])
+                 .mapToInt(Integer::parseInt)
+                 .filter(i -> i > 10)
+                 .sum();
+
+    System.out.println(x);
+  }
+}
 ```
 
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
+```csharp title="C# IEnumerable"
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class MainClass {
+  public static void Main (string[] args) {
+    var lista = new List<String>();
+    lista.Add("Cadena 13");
+    lista.Add("Cadena 2");
+    lista.Add("Cadena 15");
+
+    var x = lista.Select(s => s.Split(" ")[1])
+                 .Select(int.Parse)
+                 .Where(i => i > 10)
+                 .Sum();
+    
+    Console.WriteLine(x);
+  }
+}
 ```
 
 </Step>
 
 <Step>
 
-```js
-const lorem = (ipsum, dolor, sit) => {
-  const amet = dolor - ipsum;
-  return consectetur.adipiscing(
-    {
-      elit: sed.eiusmod(sit - dolor) / amet + 2,
-    },
-    (tempor, incididunt) => ipsum + amet * incididunt
-  );
-};
+```java title="Java Streams"
+import java.util.List;
+import java.util.ArrayList;
 
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
+
+public class Main {
+  public static void main(String[] args) {
+    List<String> lista = new ArrayList<String>();
+    lista.add("Cadena 13");
+    lista.add("Cadena 2");
+    lista.add("Cadena 15");
+
+    int x = lista.stream()
+                 .map(s -> s.split(" ")[1])
+                 .mapToInt(Integer::parseInt)
+                 .filter(i -> i > 10)
+                 .sum();
+
+    System.out.println(x);
+  }
+}
 ```
 
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
+```csharp title="C# IEnumerable" 1:20
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-const sed = (eiusmod, tempor, incididunt) => {
-  const ut = tempor - eiusmod;
-  return labore.et(
-    {
-      amet: dolore.magna(incididunt - tempor) / ut + 2,
-    },
-    (aliqua, elit) => eiusmod + ut * elit
-  );
-};
+class MainClass {
+  public static void Main (string[] args) {
+    var lista = new List<String>();
+    lista.Add("Cadena 13");
+    lista.Add("Cadena 2");
+    lista.Add("Cadena 15");
+
+    var x = (from s in lista
+             let i = int.Parse(s.Split(" ")[1])
+             where i > 10
+             select i).Sum();
+
+    Console.WriteLine(x);
+  }
+}
+```
+
+</Step>
+
+<Step>
+
+```java title="Java Streams"
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class Main {
+  public static void main(String[] args) {
+    List<String> lista = new ArrayList<String>();
+    lista.add("Cadena 13");
+    lista.add("Cadena 2");
+    lista.add("Cadena 15");
+
+    int x = lista.stream()
+                 .map(s -> s.split(" ")[1])
+                 .mapToInt(Integer::parseInt)
+                 .filter(i -> i > 10)
+                 .sum();
+
+    System.out.println(x);
+  }
+}
+```
+
+```python title="Python itertools"
+lista = []
+
+lista.append("Cadena 13")
+lista.append("Cadena 2")
+lista.append("Cadena 15")
+
+x = sum(
+      filter(lambda i: i > 10, 
+        map(int,
+          map(lambda s: s.split(" ")[1], 
+            lista
+          )
+        )
+      )
+    )
+
+print(x)
+```
+
+</Step>
+
+<Step>
+
+```java title="Java Streams"
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class Main {
+  public static void main(String[] args) {
+    List<String> lista = new ArrayList<String>();
+    lista.add("Cadena 13");
+    lista.add("Cadena 2");
+    lista.add("Cadena 15");
+
+    int x = lista.stream()
+                 .map(s -> s.split(" ")[1])
+                 .mapToInt(Integer::parseInt)
+                 .filter(i -> i > 10)
+                 .sum();
+
+    System.out.println(x);
+  }
+}
+```
+
+```python title="Python itertools" 1:20
+lista = []
+
+lista.append("Cadena 13")
+lista.append("Cadena 2")
+lista.append("Cadena 15")
+
+
+x = sum([i for i in [int(s.split(" ")[1]) for s in lista] 
+           if i > 10])
+
+print(x)
+```
+
+</Step>
+
+<Step>
+
+```java title="Java Streams"
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class Main {
+  public static void main(String[] args) {
+    List<String> lista = new ArrayList<String>();
+    lista.add("Cadena 13");
+    lista.add("Cadena 2");
+    lista.add("Cadena 15");
+
+    int x = lista.stream()
+                 .map(s -> s.split(" ")[1])
+                 .mapToInt(Integer::parseInt)
+                 .filter(i -> i > 10)
+                 .sum();
+
+    System.out.println(x);
+  }
+}
+```
+
+```js title="Javascript (Lodash)"
+const _ = require('lodash')
+
+const lista = []
+
+lista.push("Cadena 13")
+lista.push("Cadena 2")
+lista.push("Cadena 15")
+
+const x = _.sum(
+              lista.map(s => s.split(" ")[1])
+                   .map(Number)
+                   .filter(i => i > 10))
+
+console.log(x)
+```
+
+</Step>
+
+<Step>
+
+```java title="Java Streams"
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class Main {
+  public static void main(String[] args) {
+    List<String> lista = new ArrayList<String>();
+    lista.add("Cadena 13");
+    lista.add("Cadena 2");
+    lista.add("Cadena 15");
+
+    int x = lista.stream()
+                 .map(s -> s.split(" ")[1])
+                 .mapToInt(Integer::parseInt)
+                 .filter(i -> i > 10)
+                 .sum();
+
+    System.out.println(x);
+  }
+}
+```
+
+```haskell title="Haskell"
+import Data.Function
+
+main = print $ ["Cadena 13", "Cadena 2", "Cadena 15"]
+             & map ((!! 1) . words)
+             & map read
+             & filter (> 10)
+             & sum
 ```
 
 </Step>
@@ -148,5 +460,206 @@ const sed = (eiusmod, tempor, incididunt) => {
 
 ---
 
-docs:  
-[codesurfer.pomb.us](https://codesurfer.pomb.us)
+import everywhere from './resources/everywhere.jpeg'
+
+<img src={everywhere} />
+
+---
+
+# Temas
+
+- **Streams: Principios y operadores básicos**
+  - El patrón del **iterador**
+  - <span style="color: #d73a49">map</span> y <span style="color: #d73a49">filter</span> 
+  - Polimorfismo paramétrico: Genéricos
+  - Funciones lambda
+  - Interfaces
+  - <span style="color: #d73a49">reduce</span> básico
+
+- **Proyecto: Interfaz ASCII**
+  - Polimorfismo de subtipos: Herencia
+  - Clases abstractas
+  - Sobreescritura de métodos <span style="color: #00a4db">`override`</span>
+  - El patrón del **decorador**
+
+---
+
+import interfazascii from './resources/interfazascii.gif'
+
+# Interfaz ASCII 😎 
+
+<img src={interfazascii} />
+
+---
+
+<CodeSurfer>
+
+```java title="Interfaz ASCII 😎"
+package interfazascii.componentes;
+
+import interfazascii.util.Vector2D;
+
+/** Representa un componente de la interfaz de usuario */
+public abstract class Componente {
+  /**
+   * Dibuja el componente en la pantalla indicada con la transformación
+   * especificada
+   * 
+   * @param transformacion el desplazamiento al que debe estar este componente
+   * @param pantalla la pantalla en la que se debe dibujar
+   */
+  public abstract void dibujar(Vector2D transformacion, Pantalla pantalla);
+
+  /**
+   * @return el alto del componente
+   */
+  public abstract int getAlto();
+
+  /**
+   * @return el ancho del componente
+   */
+  public abstract int getAncho();
+}
+```
+
+```java title="Interfaz ASCII 😎"
+package interfazascii.componentes;
+
+import interfazascii.util.Vector2D;
+
+public abstract class Componente {
+  public abstract void dibujar(Vector2D transformacion, Pantalla pantalla);
+  public abstract int getAlto();
+  public abstract int getAncho();
+}
+```
+
+```java title="Interfaz ASCII 😎"
+package interfazascii.componentes;
+
+import interfazascii.util.Vector2D;
+
+/** Clase que representa una etiqueta de Texto */
+public class Texto extends Componente {
+  private String texto;
+
+  public Texto(String texto) {
+    if (texto == null)
+      throw new NullPointerException("El texto no puede ser nulo");
+
+    this.texto = texto;
+  }
+
+  @Override
+  public void dibujar(Vector2D transformacion, Pantalla pantalla) {
+    for (int i = 0; i < texto.length(); i++)
+      pantalla.pintar(transformacion.desplazarHorizontalmente(i), texto.charAt(i));
+  }
+
+  /**
+   * @return el texto actual de la etiqueta
+   */
+  public String getTexto() {
+    return texto;
+  }
+
+  /**
+   * Establece el valor de esta etiqueta de texto
+   * @param texto el nuevo valor de la etiqueta
+   */
+  public void setTexto(String texto) {
+    this.texto = texto;
+  }
+
+  @Override
+  public int getAlto() {
+    return 1;
+  }
+
+  @Override
+  public int getAncho() {
+    return texto.length();
+  }
+}
+```
+
+```java title="Interfaz ASCII 😎"
+package interfazascii.componentes;
+
+import interfazascii.util.Vector2D;
+
+public class Texto extends Componente {
+  private String texto;
+
+  public Texto(String texto) {
+    if (texto == null)
+      throw new NullPointerException("El texto no puede ser nulo");
+
+    this.texto = texto;
+  }
+
+  @Override
+  public void dibujar(Vector2D transformacion, Pantalla pantalla) {
+    for (int i = 0; i < texto.length(); i++)
+      pantalla.pintar(transformacion.desplazarHorizontalmente(i), texto.charAt(i));
+  }
+
+  public String getTexto() {
+    return texto;
+  }
+
+  public void setTexto(String texto) {
+    this.texto = texto;
+  }
+
+  @Override
+  public int getAlto() {
+    return 1;
+  }
+
+  @Override
+  public int getAncho() {
+    return texto.length();
+  }
+}
+```
+
+</CodeSurfer>
+
+---
+
+# Temas si continúa el paro
+
+- **Streams: Operadores avanzados**
+  - <span style="color: #d73a49">limit</span> y <span style="color: #d73a49">skip</span>
+  - <span style="color: #d73a49">reduce</span> avanzado (<span style="color: #d73a49">collect</span>)
+  - Concurrencia gratis (<span style="color: #d73a49">parallel</span>)
+  - Jugando con el infinito (<span style="color: #d73a49">generate</span>)
+
+- **Proyecto: Interfaz ASCII Interactiva**
+  - Interfaz de usuario con Java Swing <br /> (o JavaFX, si prefieren)
+  - El patrón del **observador**
+  - Eventos y clases anónimas
+  - Funciones lambda
+
+---
+
+import { Graphviz } from 'graphviz-react'
+
+# Resumen
+
+<Graphviz dot={
+  `digraph {
+    "POO Básica" -> "Streams Básico";
+    "Streams Básico" -> "Streams Avanzado";
+    "POO Básica" -> "Interfaz ASCII Básica";
+    "Interfaz ASCII Básica" -> "Interfaz ASCII Interactiva";
+  }`}/>
+
+---
+
+# Gracias
+
+- Diapositivas: [ggzor-expo-java-dia1.netlify.app](https://ggzor-expo-java-dia1.netlify.app)
+- Código fuente: [github.com/ggzor/expo-java-dia1](https://www.github.com/ggzor/expo-java-dia1)
+- Librerías utilizadas: [mdx-deck](https://github.com/jxnblk/mdx-deck) y [code-surfer](https://github.com/pomber/code-surfer)
