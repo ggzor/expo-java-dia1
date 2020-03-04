@@ -1,23 +1,9 @@
-# MDX Deck + Code Surfer template
+# Exposición del día 1
 
-This project was generated with the `npm init code-surfer-deck` command.
+En este repositorio se encuentra el código fuente de la exposición impartida en el taller de Java Intermedio durante el paro de actividades 25/02 de la BUAP.
 
-## Development
+## Recomendaciones
 
-To run the presentation deck in development mode:
+- Este repositorio no es el principal en el que se va a subir el código del taller, lo único contenido aquí es el código usado para la elaboración de la exposición, y para tener un repositorio al cual referenciar desde la plataforma [netlify](https://www.netlify.com/)
 
-```sh
-npm start
-```
-
-Edit the [`deck.mdx`](deck.mdx) file to get started.
-
-## Exporting
-
-To build the presentation deck:
-
-```sh
-npm run build
-```
-
-For more documentation see [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](https://codesurfer.pomb.us/)
+- Una vez que suba el repositorio con el código fuente, también colocaré la liga al repositorio aquí.
